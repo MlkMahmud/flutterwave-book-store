@@ -4,11 +4,9 @@
   "description": "Playing around with the Flutterwave APIs.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "NODE_ENV=production npm run build:css && npm run build:server",
-    "build:server": "babel server --out-dir dist/",
-    "build:css": "tailwind build -o server/public/styles.css",
+    "build": "babel server --out-dir dist/",
     "start": "node dist/",
-    "dev": "npm run build:css && babel-node -r dotenv/config server/"
+    "dev": "babel-node -r dotenv/config server/"
   },
   "repository": {
     "type": "git",

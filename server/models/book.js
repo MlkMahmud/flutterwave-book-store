@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       author: DataTypes.STRING,
       image: DataTypes.STRING,
       price: DataTypes.NUMBER,
-      summary: DataTypes.STRING,
+      summary: DataTypes.TEXT,
     },
     {
       sequelize,

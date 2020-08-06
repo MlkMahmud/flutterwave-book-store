@@ -3,7 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
     <title>Bookstore</title>
   </head>
-  <body>
+  <body class="bg-white">
+    <header class="header">
+      <a class="logo" href="/" aria-label="homepage">books.</a>
+      <nav class="nav">
+        <ul>
+          <% if (user) { %>
+          <li class="nav-list__item">
+            <a class="nav-list__link" href="/library">my books</a>
+          </li>
+          <li class="nav-list__item">
+            <a class="nav-list__link" href="/logout">logout</a>
+          </li>
+          <% } else { %>
+          <li class="nav-list__item">
+            <a class="nav-list__link" href="/login">login</a>
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
