@@ -2,13 +2,13 @@
   "name": "flutterwave-book-store",
   "version": "1.0.0",
   "description": "Playing around with the Flutterwave APIs.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir dist",
-    "build:css": "NODE_ENV=production tailwind build -o src/public/styles.css",
-    "dev": "babel-node -r dotenv/config src/app",
-    "start": "node dist/app"
+    "build": "NODE_ENV=production npm run build:css && npm run build:server",
+    "build:server": "babel server --out-dir dist/",
+    "build:css": "tailwind build -o server/public/styles.css",
+    "start": "node dist/",
+    "dev": "npm run build:css && babel-node -r dotenv/config server/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,11 @@
   "dependencies": {
     "ejs": "^3.1.3",
     "express": "^4.17.1",
+    "helmet": "^4.0.0",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4",
+    "sequelize-cli": "^6.2.0",
     "tailwindcss": "^1.6.2"
   },
   "devDependencies": {
