@@ -1,12 +1,16 @@
-<%- include ('partials/header', { user: { name: 'Malik' } }) %>
+<%- include ('partials/header') %>
 <section class="books">
-  <% books.forEach(({ title, image, author, id }) => { %>
+  <% books.forEach(({ title, image, author, id, price }) => { %>
     <div class="card">
       <img class="card-image" src="<%= image %>" alt="<%= title %>" />
       <div class="card-description">
-        <p><a class="card-title" href="/books/<%= id %>"><%= title %></a></p>
+        <p><b class="card-title"><%= title %></b></p>
         <span>by</span>
         <p><%= author %> </p>
+        <p><b>Price: <%= price %> </b></p>
+        <% if (!user || !user.isAdmin) { %>
+          <a href="/book/<%= id %> " class="buy-btn">Buy Book</a>
+        <% } %>
       </div>
     </div>
   <% }) %>

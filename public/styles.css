@@ -60,7 +60,7 @@ body {
 }
 
 .card {
-  height: 500px;
+  height: 600px;
   max-width: 250px;
   display: flex;
   flex-direction: column;
@@ -71,12 +71,12 @@ body {
 }
 
 .card-image {
-  height: 70%;
+  height: 65%;
   max-width: 100%;
 }
 
 .card-description {
-  height: 30%;
+  height: 35%;
   width: 100%;
   padding: 10px;
 }
@@ -86,6 +86,55 @@ body {
   color: black;
 }
 
+.buy-btn {
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  background: #28a745;
+  padding: 10px 15px;
+  border-radius: 2px;
+  text-decoration: none;
+  margin: 5px 0;
+  
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.input-item {
+  margin: 10px 0;
+  width: 300px;
+}
+
+.label {
+  display: block;
+}
+
+.input {
+  padding: 5px 10px;
+  width: 300px;
+}
+
+.input[type='submit'] {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
 @media screen and (max-width: 500px) {
   .header {
     flex-direction: column;

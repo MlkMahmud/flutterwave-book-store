@@ -1,0 +1,22 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/error.ejs') %>
+<div class="form-container">
+  <form method="POST" action="/register">
+    <div class="input-item">
+      <label class="label" for="name"><b>Name:</b></label>
+      <input class="input" required type="text" name="name" id="name">
+    </div>
+    <div class="input-item">
+      <label class="label" for="email"><b>Email:</b></label>
+      <input class="input" required type="email" name="email" id="email">
+    </div>
+    <div class="input-item">
+      <label class="label" for="password"><b>Password:</b></label>
+      <input class="input" required type="password" name="password" id="password">
+    </div>
+    <div class="input-item">
+      <input class="input" type="submit" value="register">
+    </div>
+  </form>
+</div>
+<%- include ('partials/footer.ejs') %> 
