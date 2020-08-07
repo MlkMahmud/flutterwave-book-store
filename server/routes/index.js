@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   fetchAllBooks,
-  fetchBook,
+  fetchUsersBooks,
   loginUser,
   registerUser,
 } from '../controllers';
@@ -11,13 +11,6 @@ const router = Router();
 router.get(['/', '/books'], async (req, res) => {
   const books = await fetchAllBooks();
   res.render('books', { books });
-});
-
-router.get('/book/:id', async (req, res) => {
-  const { id } = req.params;
-  const book = await fetchBook(id);
-  // Make payment here
-  res.render('book', { book });
 });
 
 router
@@ -57,6 +50,14 @@ router
 router.get('/logout', (req, res) => {
   res.clearCookie('token');
   return res.redirect('/');
+});
+
+router.get('/library', async (req, res) => {
+  const { id } = req.user;
+  const { books, error } = await fetchUsersBooks(id);
+  if (books) {
+    res.render('library', { books });
+  } else res.json(error);
 });
 
 export default router;

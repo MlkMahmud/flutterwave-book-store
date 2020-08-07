@@ -9,6 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
       },
+      transactionId: Sequelize.INTEGER,
+      requested_refund: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      received_refund: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

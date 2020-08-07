@@ -2,6 +2,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import router from './routes';
+import paymentRouter from './routes/payments';
 import verifyUser from './middleware';
 
 const port = process.env.PORT;
@@ -19,6 +20,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use(router);
-
+app.use(paymentRouter);
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Running on port ${port}`));

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
-const { Book, User } = models;
+const { Book, sequelize, User } = models;
 
 export const loginUser = async ({ email, password }) => {
   try {
@@ -41,7 +41,6 @@ export const registerUser = async ({ name, email, password }) => {
     });
     return { token };
   } catch (error) {
-    console.error(error);
     return { status: 500, message: 'Internal server error' };
   }
 };
@@ -64,6 +63,23 @@ export const fetchBook = async (id) => {
     });
     return book;
   } catch (error) {
-    return {};
+    return { error };
+  }
+};
+
+export const fetchUsersBooks = async (id) => {
+  try {
+    const [books] = await sequelize.query(
+      `SELECT * FROM "Books"
+      INNER JOIN "Purchases" as p ON "Books".id = p."BookId"
+      AND p."UserId" = :id
+      AND p.received_refund = false`,
+      {
+        replacements: { id },
+      },
+    );
+    return { books };
+  } catch (error) {
+    return { error };
   }
 };
