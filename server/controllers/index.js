@@ -19,7 +19,7 @@ export const loginUser = async ({ email, password }) => {
       return { token };
     }
     return { status: 401, message: 'User does not exist' };
-  } catch {
+  } catch (error) {
     return { status: 500, message: 'Internal server error' };
   }
 };

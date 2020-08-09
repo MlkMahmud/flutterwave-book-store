@@ -13,7 +13,7 @@ const headers = {
 export const initiatePayment = async ({ book, customer }) => {
   try {
     const url = 'https://api.flutterwave.com/v3/payments';
-    const redirect_url = 'http://localhost:3000/charge';
+    const redirect_url = 'https://flutter-book-store.herokuapp.com/charge';
     const { price, title, author } = book;
     const { name, email } = customer;
     const payload = {
