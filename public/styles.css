@@ -91,7 +91,7 @@ body {
   color: white;
   font-weight: bold;
   background: #28a745;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border-radius: 2px;
   text-decoration: none;
   margin: 5px 0;
@@ -135,6 +135,31 @@ body {
   border: 1px solid transparent;
   border-radius: .25rem;
 }
+
+.book-container {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+}
+
+.section-header {
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.danger {
+  color: darkred;
+}
+
 @media screen and (max-width: 500px) {
   .header {
     flex-direction: column;

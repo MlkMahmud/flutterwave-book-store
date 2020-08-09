@@ -83,3 +83,18 @@ export const fetchUsersBooks = async (id) => {
     return { error };
   }
 };
+
+export const fetchAllTransactions = async () => {
+  try {
+    const [transactions] = await sequelize.query(
+      `SELECT name, author, email, title, price, requested_refund, 
+      received_refund as refunded, p."transactionId" as id
+      FROM "Books"
+      INNER JOIN "Purchases" as p ON p."BookId" = "Books".id
+      INNER JOIN "Users" ON p."UserId" = "Users".id`,
+    );
+    return { transactions };
+  } catch (error) {
+    return { error };
+  }
+};

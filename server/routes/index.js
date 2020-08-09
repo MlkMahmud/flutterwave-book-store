@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import {
   fetchAllBooks,
+  fetchAllTransactions,
   fetchUsersBooks,
   loginUser,
   registerUser,
+  requestRefund,
 } from '../controllers';
 
 const router = Router();
@@ -58,6 +60,28 @@ router.get('/library', async (req, res) => {
   if (books) {
     res.render('library', { books });
   } else res.json(error);
+});
+
+router.get('/returns/:id', async (req, res) => {
+  const { id } = req.params;
+  const { error, status } = await requestRefund(id);
+  if (status) {
+    res.redirect('/library');
+  } else {
+    res.json(error);
+  }
+});
+
+router.get('/dashboard', async (req, res) => {
+  const { isAdmin } = req.user || {};
+  if (isAdmin) {
+    const { error, transactions } = await fetchAllTransactions();
+    if (error) {
+      res.json(error);
+    } else res.render('dashboard', { transactions });
+  } else {
+    res.status(403).json({ message: 'This page is unaccessible to non-admin users' });
+  }
 });
 
 export default router;

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { v4 } from 'uuid';
 import models from '../models';
 
+const { Purchase } = models;
 const { SECRET_KEY } = process.env;
 const headers = {
   Authorization: `Bearer ${SECRET_KEY}`,
@@ -12,7 +13,6 @@ const headers = {
 export const initiatePayment = async ({ book, customer }) => {
   try {
     const url = 'https://api.flutterwave.com/v3/payments';
-    // eslint-disable-next-line camelcase
     const redirect_url = 'http://localhost:3000/charge';
     const { price, title, author } = book;
     const { name, email } = customer;
@@ -64,13 +64,47 @@ export const verifyPayment = async (id) => {
     if (status !== 'success' || amount < charged_amount) {
       throw Error(message);
     }
-    const { Purchase } = models;
     await Purchase.create({
       BookId: Number(meta.bookId),
       UserId: Number(meta.customerId),
       transactionId,
     });
     return { status };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const requestRefund = async (transactionId) => {
+  try {
+    await Purchase.update(
+      {
+        requested_refund: true,
+      },
+      {
+        where: { transactionId },
+      },
+    );
+    return { status: 'success' };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const approveRefund = async (id) => {
+  try {
+    const url = `https://api.flutterwave.com/v3/transactions/${id}/refund`;
+    const { data } = await axios(url, {
+      headers,
+      method: 'POST',
+    });
+    if (data && data.status === 'success') {
+      await Purchase.update(
+        { received_refund: true },
+        { where: { transactionId: id } },
+      );
+      return { status: data.status };
+    } throw Error(data);
   } catch (error) {
     return { error };
   }

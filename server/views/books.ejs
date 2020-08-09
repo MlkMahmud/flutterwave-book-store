@@ -7,7 +7,7 @@
         <p><b class="card-title"><%= title %></b></p>
         <span>by</span>
         <p><%= author %> </p>
-        <p><b>Price: <%= price %> </b></p>
+        <p><b>Price: N<%= price %> </b></p>
         <% if (!user || !user.isAdmin) { %>
           <a href="/book/<%= id %> " class="buy-btn">Buy Book</a>
         <% } %>
