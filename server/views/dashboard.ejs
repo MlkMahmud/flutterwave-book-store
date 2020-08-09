@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+  <section class="transactions">
+    <header class="section-header">transactions</header>
+    <% if (!transactions.length) { %>
+      <div>
+        <b>There are currently no transactions to show.</b>
+      </div>
+    <% } else { %>
+      <div>
+        <% transactions.forEach(({ title, author, name, email, requested_refund, refunded, price, id }) => { %>
+         <div class="transaction">
+           <p><b>Item: </b><%= title %> by <%= author %></p>
+           <p><b>Total: N</b><%= price %> </p>
+           <p><b>Customer Name: </b><%= name %></p>
+           <p><b>Customer Email: </b><%= email %></p>
+           <% if (requested_refund) { %>
+            <% if (refunded) { %>
+              <b class="danger">Refunded Customer</b>
+            <% } else { %>
+              <b>Customer requested a refund</b>
+              <a href="/refund/<%= id %>" class="buy-btn">Refund Customer</a>
+            <% } %>
+           <% } %>
+         </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+<%- include('partials/footer') %>

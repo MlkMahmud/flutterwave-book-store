@@ -1,0 +1,23 @@
+<%- include ('partials/header.ejs') %>
+ <section>
+  <header class="section-header">my library</header>
+  <% if (books.length) { %>
+    <% books.forEach(({ transactionId: id, title, author, requested_refund }) => { %>
+     <div class="book-container">
+      <p>
+        <b><%= title %></b> by <%= author %>
+      </p>
+      <% if (requested_refund) { %>
+        <span>
+          <b>Requested refund</b>
+        </span>
+      <% } else { %>
+        <a href="/returns/<%= id %>" class="buy-btn">Return Book</a>
+      <% } %>
+     </div>
+    <% }) %>
+   <% } else { %>
+      <div style="text-align: center;">Your library is currently empty :(</div>
+   <% } %>
+ </section>
+<%- include ('partials/footer.ejs') %>
