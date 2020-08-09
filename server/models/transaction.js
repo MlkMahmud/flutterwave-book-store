@@ -1,10 +1,10 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Purchase extends Model {
+  class Transaction extends Model {
     static associate(models) {}
   }
-  Purchase.init(
+  Transaction.init(
     {
       BookId: DataTypes.INTEGER,
       UserId: DataTypes.INTEGER,
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Purchase',
+      modelName: 'Transaction',
     },
   );
-  return Purchase;
+  return Transaction;
 };

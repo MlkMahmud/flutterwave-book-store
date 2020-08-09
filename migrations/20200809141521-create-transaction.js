@@ -1,22 +1,26 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Purchases', {
+    await queryInterface.createTable('Transactions', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       BookId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
       },
       UserId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
       },
-      transactionId: Sequelize.INTEGER,
+      transactionId: {
+        type: Sequelize.INTEGER,
+      },
       requested_refund: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
       },
       received_refund: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +33,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Purchases');
+    await queryInterface.dropTable('Transactions');
   },
 };

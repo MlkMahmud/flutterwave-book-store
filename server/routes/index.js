@@ -5,8 +5,8 @@ import {
   fetchUsersBooks,
   loginUser,
   registerUser,
-  requestRefund,
 } from '../controllers';
+import { requestRefund } from '../controllers/payments';
 
 const router = Router();
 
@@ -44,7 +44,7 @@ router
     });
     if (token) {
       res.cookie('token', token, { httpOnly: true });
-      return res.redirect('back');
+      return res.redirect('/');
     }
     return res.status(status).render('register', { message });
   });

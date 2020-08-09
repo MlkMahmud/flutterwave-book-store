@@ -71,9 +71,9 @@ export const fetchUsersBooks = async (id) => {
   try {
     const [books] = await sequelize.query(
       `SELECT * FROM "Books"
-      INNER JOIN "Purchases" as p ON "Books".id = p."BookId"
-      AND p."UserId" = :id
-      AND p.received_refund = false`,
+      INNER JOIN "Transactions" as t ON "Books".id = t."BookId"
+      AND t."UserId" = :id
+      AND t.received_refund = false`,
       {
         replacements: { id },
       },
@@ -88,10 +88,10 @@ export const fetchAllTransactions = async () => {
   try {
     const [transactions] = await sequelize.query(
       `SELECT name, author, email, title, price, requested_refund, 
-      received_refund as refunded, p."transactionId" as id
+      received_refund as refunded, t."transactionId" as id
       FROM "Books"
-      INNER JOIN "Purchases" as p ON p."BookId" = "Books".id
-      INNER JOIN "Users" ON p."UserId" = "Users".id`,
+      INNER JOIN "Transactions" as t ON t."BookId" = "Books".id
+      INNER JOIN "Users" ON t."UserId" = "Users".id`,
     );
     return { transactions };
   } catch (error) {

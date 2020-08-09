@@ -30,7 +30,7 @@ router.get('/charge', async (req, res) => {
 
 router.get('/refund/:id', async (req, res) => {
   const { id } = req.params;
-  if (req.user && !req.user.iAdmin) {
+  if (req.user && !req.user.isAdmin) {
     res.json({ message: 'Only admin users can approve refunds' });
   } else {
     const { error, status } = await approveRefund(id);

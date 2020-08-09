@@ -3,7 +3,7 @@ import axios from 'axios';
 import { v4 } from 'uuid';
 import models from '../models';
 
-const { Purchase } = models;
+const { Transaction } = models;
 const { SECRET_KEY } = process.env;
 const headers = {
   Authorization: `Bearer ${SECRET_KEY}`,
@@ -64,7 +64,7 @@ export const verifyPayment = async (id) => {
     if (status !== 'success' || amount < charged_amount) {
       throw Error(message);
     }
-    await Purchase.create({
+    await Transaction.create({
       BookId: Number(meta.bookId),
       UserId: Number(meta.customerId),
       transactionId,
@@ -77,7 +77,7 @@ export const verifyPayment = async (id) => {
 
 export const requestRefund = async (transactionId) => {
   try {
-    await Purchase.update(
+    await Transaction.update(
       {
         requested_refund: true,
       },
@@ -99,7 +99,7 @@ export const approveRefund = async (id) => {
       method: 'POST',
     });
     if (data && data.status === 'success') {
-      await Purchase.update(
+      await Transaction.update(
         { received_refund: true },
         { where: { transactionId: id } },
       );
