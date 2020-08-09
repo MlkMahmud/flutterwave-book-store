@@ -11,7 +11,7 @@ function verifyUser(req, res, next) {
       next();
     } else res.redirect('/login');
   } else {
-    jwt.verify(token, process.env.JWT_SECRET, async (err, { id }) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
         if (PUBLIC_ROUTES.includes(req.path)) {
           req.user = null;
@@ -20,7 +20,7 @@ function verifyUser(req, res, next) {
       } else {
         const { User } = models;
         const user = await User.findOne({
-          where: id,
+          where: { id: decoded.id },
         });
         req.user = user;
         next();
